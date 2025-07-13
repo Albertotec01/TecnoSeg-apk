@@ -1,0 +1,43 @@
+name: Build TecnoSeg APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Instalar unzip
+        run: sudo apt-get install -y unzip
+
+      - name: Descompactar projeto na pasta correta
+        run: unzip tecno_seg_base_for_apk_v2 (3).zip -d projeto
+
+      - name: Instalar Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.1'
+
+      - name: Verificar versão do Flutter
+        run: flutter --version
+
+      - name: Obter dependências
+        working-directory: projeto/tecno_seg_base_for_apk_v2 (3)
+        run: flutter pub get
+
+      - name: Compilar APK (release)
+        working-directory: projeto/tecno_seg_base_for_apk_v2 (3)
+        run: flutter build apk --release
+
+      - name: Enviar APK como artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: TecnoSeg-APK
+          path: projeto/tecno_seg_base_for_apk_v2 (3)/build/app/outputs/flutter-apk/app-release.apk
