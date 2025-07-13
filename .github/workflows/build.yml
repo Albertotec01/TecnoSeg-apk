@@ -40,4 +40,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: TecnoSeg-APK
-          path: projeto/tecno_seg_base_for_apk_v2 (3)/build/app/outputs/flutter-apk/app-release.apk
+          path: projeto/tecno_seg_base_for_apk_v2/build/app/outputs/flutter-apk/app-release.apk
